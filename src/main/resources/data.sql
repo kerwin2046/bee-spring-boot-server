@@ -17,7 +17,8 @@ ALTER TABLE roles AUTO_INCREMENT = 1;
 -- 插入角色数据
 INSERT INTO roles (id, name, code, description) VALUES
 (1, 'ROLE_ADMIN', 'SUPER_ADMIN', '超级管理员'),
-(2, 'ROLE_USER', 'TEST', '测试用户');
+(2, 'ROLE_USER', 'TEST', '测试用户'),
+(3, 'ROLE_MODERATOR', 'MODERATOR', '协管员');
 
 -- 插入权限数据
 INSERT INTO permissions (id, name, code, description, resource, action, is_active) VALUES
@@ -100,7 +101,8 @@ INSERT INTO users (id, username, email, password, avatar, nickname, phone, is_ac
 INSERT INTO user_roles (user_id, role_id) VALUES
 (1, 1), -- admin用户 -> 超级管理员角色
 (2, 2), -- test用户 -> 测试用户角色
-(3, 2); -- guest用户 -> 测试用户角色
+(3, 2), -- guest用户 -> 测试用户角色
+(3, 3); -- guest用户 -> 协管员角色
 
 -- 插入角色权限关联数据
 INSERT INTO role_permissions (role_id, permission_id) VALUES
@@ -111,7 +113,10 @@ INSERT INTO role_permissions (role_id, permission_id) VALUES
 (1, 'permission_delete'),
 -- 测试用户只有读取和更新权限
 (2, 'permission_read'),
-(2, 'permission_update');
+(2, 'permission_update'),
+-- 协管员拥有读取和更新权限
+(3, 'permission_read'),
+(3, 'permission_update');
 
 -- 插入角色菜单关联数据（超级管理员拥有所有菜单）
 INSERT INTO role_menus (role_id, menu_id) VALUES
@@ -176,4 +181,13 @@ INSERT INTO role_menus (role_id, menu_id) VALUES
 (2, 'components'),
 (2, 'components_icon'),
 (2, 'group_others'),
-(2, 'permission');
+(2, 'permission'),
+
+-- 协管员角色菜单
+(3, 'group_dashboard'),
+(3, 'workbench'),
+(3, 'analysis'),
+(3, 'group_pages'),
+(3, 'management'),
+(3, 'management_user'),
+(3, 'management_user_profile');

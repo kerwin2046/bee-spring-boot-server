@@ -30,6 +30,7 @@ public class RefreshTokenService {
         return refreshTokenRepository.findByToken(token);
     }
     
+    @Transactional
     public RefreshToken createRefreshToken(Long userId) {
         RefreshToken refreshToken = new RefreshToken();
         
